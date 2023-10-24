@@ -10,7 +10,7 @@
   },
   "dependencies": {
     "bootstrap": "^5.2.3",
-    "firebase": "^9.18.0",
+    "firebase": "^10.5.0",
     "firebaseui": "^6.0.2",
     "react": "^18.2.0",
     "react-bootstrap": "^2.7.4",
