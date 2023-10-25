@@ -1,6 +1,4 @@
 import { initializeApp } from 'firebase/app'
-import { getAuth } from 'firebase/auth'
-import 'firebase/auth'
 
 const firebaseConfig = {
   apiKey: import.meta.env.VITE_REACT_APP_FIREBASE_API_KEY,
@@ -11,7 +9,6 @@ const firebaseConfig = {
   appId: import.meta.env.VITE_REACT_APP_FIREBASE_APP_ID
 }
 
-const app = initializeApp(firebaseConfig)
+const firebaseApp = initializeApp(firebaseConfig)
 
-export const auth = getAuth(app)
-export default app
+export default firebaseApp

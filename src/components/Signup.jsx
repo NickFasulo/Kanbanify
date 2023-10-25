@@ -6,7 +6,7 @@ export default function Signup() {
   const emailRef = useRef()
   const passwordRef = useRef()
   const passwordConfirmRef = useRef()
-  const { signup } = useAuth()
+  const { signup, currentUser } = useAuth()
   const [error, setError] = useState('')
   const [loading, setLoading] = useState(false)
 
@@ -21,7 +21,8 @@ export default function Signup() {
       setError('')
       setLoading(true)
       await signup(emailRef.current.value, passwordRef.current.value)
-    } catch {
+    } catch(err) {
+      console.log(err)
       setError('Account creation failed.')
     }
     setLoading(false)
@@ -32,16 +33,22 @@ export default function Signup() {
       <Card>
         <Card.Body>
           <h2 className='text-center mb4'>Sign Up</h2>
+          {error && (
+            <Alert className='text-center mt-3 mb-3' variant='danger'>
+              {error}
+            </Alert>
+          )}
+          {JSON.stringify(currentUser.email)}
           <Form onSubmit={handleSubmit}>
             <Form.Group id='email'>
               <Form.Label>Email</Form.Label>
               <Form.Control type='email' ref={emailRef} required />
             </Form.Group>
-            <Form.Group className='mt-2' id='password'>
+            <Form.Group className='mt-4' id='password'>
               <Form.Label>Password</Form.Label>
               <Form.Control type='password' ref={passwordRef} required />
             </Form.Group>
-            <Form.Group className='mt-2' id='password-confirm'>
+            <Form.Group className='mt-4' id='password-confirm'>
               <Form.Label>Confirm Password</Form.Label>
               <Form.Control type='password' ref={passwordConfirmRef} required />
             </Form.Group>
@@ -52,11 +59,6 @@ export default function Signup() {
             >
               Sign Up
             </Button>
-            {error && (
-              <Alert className='mt-2 mb-2' variant='danger'>
-                {error}
-              </Alert>
-            )}
           </Form>
         </Card.Body>
       </Card>
