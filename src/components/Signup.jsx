@@ -1,5 +1,5 @@
 import { useRef, useState } from 'react'
-import { Form, Button, Card } from 'react-bootstrap'
+import { Form, Button, Card, Alert } from 'react-bootstrap'
 import { useAuth } from '../contexts/AuthContext'
 
 export default function Signup() {
@@ -8,15 +8,23 @@ export default function Signup() {
   const passwordConfirmRef = useRef()
   const { signup } = useAuth()
   const [error, setError] = useState('')
+  const [loading, setLoading] = useState(false)
 
-  function handleSubmit(e) {
+  async function handleSubmit(e) {
     e.preventDefault()
 
     if (passwordRef.current.value !== passwordConfirmRef.current.value) {
       return setError('Passwords do not match.')
     }
 
-    signup(emailRef.current.value, passwordRef.current.value)
+    try {
+      setError('')
+      setLoading(true)
+      await signup(emailRef.current.value, passwordRef.current.value)
+    } catch {
+      setError('Account creation failed.')
+    }
+    setLoading(false)
   }
 
   return (
@@ -24,22 +32,31 @@ export default function Signup() {
       <Card>
         <Card.Body>
           <h2 className='text-center mb4'>Sign Up</h2>
-          <Form>
+          <Form onSubmit={handleSubmit}>
             <Form.Group id='email'>
               <Form.Label>Email</Form.Label>
               <Form.Control type='email' ref={emailRef} required />
             </Form.Group>
-            <Form.Group id='password'>
+            <Form.Group className='mt-2' id='password'>
               <Form.Label>Password</Form.Label>
               <Form.Control type='password' ref={passwordRef} required />
             </Form.Group>
-            <Form.Group id='password-confirm'>
+            <Form.Group className='mt-2' id='password-confirm'>
               <Form.Label>Confirm Password</Form.Label>
               <Form.Control type='password' ref={passwordConfirmRef} required />
             </Form.Group>
-            <Button className='w-100 mt-4 mb-2' type='submit'>
+            <Button
+              disabled={loading}
+              className='w-100 mt-4 mb-2'
+              type='submit'
+            >
               Sign Up
             </Button>
+            {error && (
+              <Alert className='mt-2 mb-2' variant='danger'>
+                {error}
+              </Alert>
+            )}
           </Form>
         </Card.Body>
       </Card>

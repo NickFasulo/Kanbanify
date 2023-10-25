@@ -24,7 +24,8 @@ export function AuthProdiver({ children }) {
   }, [])
 
   const value = {
-    currentUser
+    currentUser,
+    signup
   }
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>
