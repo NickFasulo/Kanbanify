@@ -6,7 +6,7 @@ export default function Signup() {
   const emailRef = useRef()
   const passwordRef = useRef()
   const passwordConfirmRef = useRef()
-  const { signup, currentUser } = useAuth()
+  const { signup } = useAuth()
   const [error, setError] = useState('')
   const [loading, setLoading] = useState(false)
 
@@ -21,7 +21,7 @@ export default function Signup() {
       setError('')
       setLoading(true)
       await signup(emailRef.current.value, passwordRef.current.value)
-    } catch(err) {
+    } catch (err) {
       console.log(err)
       setError('Account creation failed.')
     }
@@ -38,7 +38,6 @@ export default function Signup() {
               {error}
             </Alert>
           )}
-          {JSON.stringify(currentUser.email)}
           <Form onSubmit={handleSubmit}>
             <Form.Group id='email'>
               <Form.Label>Email</Form.Label>
