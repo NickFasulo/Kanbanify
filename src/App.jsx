@@ -3,7 +3,7 @@ import Signup from './components/Signup'
 import Dashboard from './components/Dashboard'
 import { Container } from 'react-bootstrap'
 import { AuthProdiver } from './contexts/AuthContext'
-import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 
 export default function App() {
   return (
@@ -11,11 +11,11 @@ export default function App() {
       <div className='w-100' style={{ maxWidth: 400 }}>
         <Router>
           <AuthProdiver>
-            <Switch>
-              <Route exact path='/' component={Dashboard} />
-              <Route path='/signup' component={Signup} />
-              <Route path='/login' component={Login} />
-            </Switch>
+            <Routes>
+              <Route exact path='/' element={<Dashboard />} />
+              <Route path='/signup' element={<Signup />} />
+              <Route path='/login' element={<Login />} />
+            </Routes>
           </AuthProdiver>
         </Router>
       </div>
