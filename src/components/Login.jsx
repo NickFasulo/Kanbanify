@@ -1,12 +1,13 @@
 import { useRef, useState } from 'react'
 import { Form, Button, Card, Alert } from 'react-bootstrap'
 import { useAuth } from '../contexts/AuthContext'
-import { Link, redirect } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 
 export default function Login() {
   const emailRef = useRef()
   const passwordRef = useRef()
   const { login } = useAuth()
+  const navigate = useNavigate()
   const [error, setError] = useState('')
   const [loading, setLoading] = useState(false)
 
@@ -17,7 +18,7 @@ export default function Login() {
       setError('')
       setLoading(true)
       await login(emailRef.current.value, passwordRef.current.value)
-      redirect('/')
+      navigate('/')
     } catch (err) {
       console.log(err)
       setError('Log in failed.')
