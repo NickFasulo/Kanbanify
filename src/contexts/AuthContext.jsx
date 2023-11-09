@@ -2,8 +2,9 @@ import React from 'react'
 import { useContext, useState, useEffect } from 'react'
 import {
   getAuth,
-  createUserWithEmailAndPassword,
-  signInWithEmailAndPassword
+  signOut,
+  signInWithEmailAndPassword,
+  createUserWithEmailAndPassword
 } from 'firebase/auth'
 import firebaseApp from '../firebase'
 
@@ -24,6 +25,10 @@ export function AuthProdiver({ children }) {
 
   function login(email, password) {
     return signInWithEmailAndPassword(auth, email, password)
+  }
+
+  function logout() {
+    return signOut(auth)
   }
 
   useEffect(() => {
