@@ -1,9 +1,10 @@
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
+import { Container } from 'react-bootstrap'
 import Login from './components/Login'
 import Signup from './components/Signup'
 import Dashboard from './components/Dashboard'
-import { Container } from 'react-bootstrap'
+import PrivateRoute from './components/PrivateRoute'
 import { AuthProdiver } from './contexts/AuthContext'
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 
 export default function App() {
   return (
@@ -12,7 +13,14 @@ export default function App() {
         <Router>
           <AuthProdiver>
             <Routes>
-              <Route exact path='/' element={<Dashboard />} />
+              <Route
+                index
+                element={
+                  <PrivateRoute>
+                    <Dashboard />
+                  </PrivateRoute>
+                }
+              />
               <Route path='/signup' element={<Signup />} />
               <Route path='/login' element={<Login />} />
             </Routes>
