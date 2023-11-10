@@ -4,6 +4,7 @@ import Login from './components/Login'
 import Signup from './components/Signup'
 import Dashboard from './components/Dashboard'
 import PrivateRoute from './components/PrivateRoute'
+import ForgotPassword from './components/ForgotPassword'
 import { AuthProdiver } from './contexts/AuthContext'
 
 export default function App() {
@@ -23,6 +24,7 @@ export default function App() {
               />
               <Route path='/signup' element={<Signup />} />
               <Route path='/login' element={<Login />} />
+              <Route path='/forgot-password' element={<ForgotPassword />} />
             </Routes>
           </AuthProdiver>
         </Router>
