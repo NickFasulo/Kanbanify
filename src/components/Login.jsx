@@ -45,21 +45,19 @@ export default function Login() {
               <Form.Label>Password</Form.Label>
               <Form.Control type='password' ref={passwordRef} required />
             </Form.Group>
-            <Button
-              disabled={loading}
-              className='w-100 mt-4 mb-2'
-              type='submit'
-            >
-              Log In
-            </Button>
+            <div className='d-flex align-items-center mt-5 mb-2'>
+              <Button disabled={loading} className='w-50' type='submit'>
+                Log In
+              </Button>
+              <div className='w-50 text-center'>
+                <Link to='/forgot-password'>Forgot Password?</Link>
+              </div>
+            </div>
           </Form>
-          <div className='w-100 text-center mt-2'>
-            <Link to='/forgot-password'>Forgot Password?</Link>
-          </div>
         </Card.Body>
       </Card>
       <div className='w-100 text-center mt-2'>
-        Don't have an account? <Link to='/signup'>Sign Up</Link>
+        Don't have an account? &nbsp; <Link to='/signup'>Sign Up</Link>
       </div>
     </>
   )
