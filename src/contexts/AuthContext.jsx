@@ -2,9 +2,12 @@ import { createContext, useContext, useState, useEffect } from 'react'
 import {
   getAuth,
   signOut,
-  signInWithEmailAndPassword,
   createUserWithEmailAndPassword,
-  sendPasswordResetEmail
+  signInWithEmailAndPassword,
+  sendPasswordResetEmail,
+  updatePassword,
+  updateProfile,
+  updateEmail
 } from 'firebase/auth'
 import firebaseApp from '../firebase'
 
@@ -19,22 +22,6 @@ export function AuthProdiver({ children }) {
   const [currentUser, setCurrentUser] = useState()
   const [loading, setLoading] = useState(true)
 
-  function signup(email, password) {
-    return createUserWithEmailAndPassword(auth, email, password)
-  }
-
-  function login(email, password) {
-    return signInWithEmailAndPassword(auth, email, password)
-  }
-
-  function logout() {
-    return signOut(auth)
-  }
-
-  function resetPassword(email) {
-    return sendPasswordResetEmail(auth, email)
-  }
-
   useEffect(() => {
     const unsubscribe = auth.onAuthStateChanged(user => {
       setCurrentUser(user)
@@ -44,12 +31,50 @@ export function AuthProdiver({ children }) {
     return unsubscribe
   }, [])
 
+  function signup(email, password) {
+    return createUserWithEmailAndPassword(auth, email, password).catch(err => {
+      console.log(err)
+    })
+  }
+
+  function login(email, password) {
+    return signInWithEmailAndPassword(auth, email, password).catch(err => {
+      console.log(err)
+    })
+  }
+
+  function logout() {
+    return signOut(auth).catch(err => {
+      console.log(err)
+    })
+  }
+
+  function resetPassword(email) {
+    return sendPasswordResetEmail(auth, email).catch(err => {
+      console.log(err)
+    })
+  }
+
+  function updateEml(email) {
+    return updateEmail(auth.currentUser, email).catch(err => {
+      console.log(err)
+    })
+  }
+
+  function updatePw(password) {
+    return updatePassword(auth.currentUser, password).catch(err => {
+      console.log(err)
+    })
+  }
+
   const value = {
     currentUser,
     signup,
     login,
     logout,
-    resetPassword
+    resetPassword,
+    updateEml,
+    updatePw
   }
 
   return (

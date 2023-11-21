@@ -4,6 +4,7 @@ import Login from './components/Login'
 import Signup from './components/Signup'
 import Dashboard from './components/Dashboard'
 import PrivateRoute from './components/PrivateRoute'
+import UpdateProfile from './components/UpdateProfile'
 import ForgotPassword from './components/ForgotPassword'
 import { AuthProdiver } from './contexts/AuthContext'
 
@@ -19,6 +20,14 @@ export default function App() {
                 element={
                   <PrivateRoute>
                     <Dashboard />
+                  </PrivateRoute>
+                }
+              />
+              <Route
+                path='/update-profile'
+                element={
+                  <PrivateRoute>
+                    <UpdateProfile />
                   </PrivateRoute>
                 }
               />

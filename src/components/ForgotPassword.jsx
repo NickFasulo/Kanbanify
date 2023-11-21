@@ -12,7 +12,7 @@ export default function ForgotPassword() {
 
   async function handleSubmit(e) {
     e.preventDefault()
-
+ 
     try {
       setError('')
       setMessage('')
@@ -30,7 +30,7 @@ export default function ForgotPassword() {
     <>
       <Card>
         <Card.Body>
-          <h2 className='text-center mb4'>Reset Password</h2>
+          <h2 className='text-center mb-4'>Reset Password</h2>
           {error && (
             <Alert className='text-center mt-3 mb-3' variant='danger'>
               {error}
