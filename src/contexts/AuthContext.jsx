@@ -32,39 +32,27 @@ export function AuthProdiver({ children }) {
   }, [])
 
   function signup(email, password) {
-    return createUserWithEmailAndPassword(auth, email, password).catch(err => {
-      console.log(err)
-    })
+    return createUserWithEmailAndPassword(auth, email, password)
   }
 
   function login(email, password) {
-    return signInWithEmailAndPassword(auth, email, password).catch(err => {
-      console.log(err)
-    })
+    return signInWithEmailAndPassword(auth, email, password)
   }
 
   function logout() {
-    return signOut(auth).catch(err => {
-      console.log(err)
-    })
+    return signOut(auth)
   }
 
   function resetPassword(email) {
-    return sendPasswordResetEmail(auth, email).catch(err => {
-      console.log(err)
-    })
+    return sendPasswordResetEmail(auth, email)
   }
 
   function updateEml(email) {
-    return updateEmail(auth.currentUser, email).catch(err => {
-      console.log(err)
-    })
+    return updateEmail(auth.currentUser, email)
   }
 
   function updatePw(password) {
-    return updatePassword(auth.currentUser, password).catch(err => {
-      console.log(err)
-    })
+    return updatePassword(auth.currentUser, password)
   }
 
   const value = {

@@ -26,7 +26,11 @@ export default function Signup() {
       navigate('/')
     } catch (err) {
       console.log(err)
+      if (err.code === 'auth/email-already-in-use') {
+        setError('Email is already in use.')
+      } else {
       setError('Account creation failed.')
+      }
     }
     setLoading(false)
   }
