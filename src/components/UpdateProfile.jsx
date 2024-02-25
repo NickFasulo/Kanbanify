@@ -68,7 +68,7 @@ export default function UpdateProfile() {
               <Form.Control
                 type='password'
                 ref={passwordRef}
-                placeholder='Leave blank to keep the same.'
+                placeholder='Leave blank to keep the same'
               />
             </Form.Group>
             <Form.Group className='mt-4' id='password-confirm'>

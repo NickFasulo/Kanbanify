@@ -6,8 +6,6 @@ import { useAuth } from '../contexts/AuthContext'
 
 export default function Signup() {
   const emailRef = useRef()
-  // const passwordRef = useRef()
-  // const passwordConfirmRef = useRef()
   const [password, setPassword] = useState('')
   const [passwordConfirm, setPasswordConfirm] = useState('')
   const { signup } = useAuth()
@@ -18,14 +16,10 @@ export default function Signup() {
   async function handleSubmit(e) {
     e.preventDefault()
 
-    if (passwordRef.current.value !== passwordConfirmRef.current.value) {
-      return setError('Passwords do not match.')
-    }
-
     try {
       setError('')
       setLoading(true)
-      await signup(emailRef.current.value, passwordRef.current.value)
+      await signup(emailRef.current.value, password)
       navigate('/')
     } catch (err) {
       console.log(err)
@@ -58,7 +52,6 @@ export default function Signup() {
               <Form.Control
                 type='password'
                 onChange={e => setPassword(e.target.value)}
-                // ref={passwordRef}
                 required
               />
             </Form.Group>
@@ -67,7 +60,6 @@ export default function Signup() {
               <Form.Control
                 type='password'
                 onChange={e => setPasswordConfirm(e.target.value)}
-                // ref={passwordConfirmRef}
                 required
               />
             </Form.Group>
