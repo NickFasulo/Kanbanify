@@ -1,3 +1,7 @@
 a {
   text-decoration: none;
 }
+
+.pw-checklist li {
+  align-items: center !important;
+}

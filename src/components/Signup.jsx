@@ -1,12 +1,15 @@
 import { useRef, useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { Form, Button, Card, Alert } from 'react-bootstrap'
+import PasswordChecklist from 'react-password-checklist'
 import { useAuth } from '../contexts/AuthContext'
 
 export default function Signup() {
   const emailRef = useRef()
-  const passwordRef = useRef()
-  const passwordConfirmRef = useRef()
+  // const passwordRef = useRef()
+  // const passwordConfirmRef = useRef()
+  const [password, setPassword] = useState('')
+  const [passwordConfirm, setPasswordConfirm] = useState('')
   const { signup } = useAuth()
   const navigate = useNavigate()
   const [error, setError] = useState('')
@@ -29,7 +32,7 @@ export default function Signup() {
       if (err.code === 'auth/email-already-in-use') {
         setError('Email is already in use.')
       } else {
-      setError('Account creation failed.')
+        setError('Account creation failed.')
       }
     }
     setLoading(false)
@@ -52,19 +55,45 @@ export default function Signup() {
             </Form.Group>
             <Form.Group className='mt-4' id='password'>
               <Form.Label>Password</Form.Label>
-              <Form.Control type='password' ref={passwordRef} required />
+              <Form.Control
+                type='password'
+                onChange={e => setPassword(e.target.value)}
+                // ref={passwordRef}
+                required
+              />
             </Form.Group>
             <Form.Group className='mt-4' id='password-confirm'>
               <Form.Label>Confirm Password</Form.Label>
-              <Form.Control type='password' ref={passwordConfirmRef} required />
+              <Form.Control
+                type='password'
+                onChange={e => setPasswordConfirm(e.target.value)}
+                // ref={passwordConfirmRef}
+                required
+              />
             </Form.Group>
             <Button
               disabled={loading}
-              className='w-100 mt-4 mb-2'
+              className='w-100 mt-4 mb-3'
               type='submit'
             >
               Sign Up
             </Button>
+            <div className='d-flex justify-content-center'>
+              <PasswordChecklist
+                rules={[
+                  'minLength',
+                  'specialChar',
+                  'number',
+                  'capital',
+                  'match'
+                ]}
+                minLength={8}
+                value={password}
+                valueAgain={passwordConfirm}
+                onChange={isValid => {}}
+                className='pw-checklist'
+              />
+            </div>
           </Form>
         </Card.Body>
       </Card>
